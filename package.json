@@ -2,6 +2,7 @@
   "name": "mui-datatables",
   "version": "3.7.2",
   "description": "Datatables for React using Material-UI",
+  "module": "src/index.js",
   "scripts": {
     "dev": "cross-env NODE_ENV=development webpack-dev-server -d --progress --colors",
     "test": "cross-env NODE_ENV=test mocha --require @babel/register test/**/*.test.js",
