@@ -1,6 +1,7 @@
 import React from 'react';
-import { IconButton } from '@material-ui/core';
-import { KeyboardArrowRight, Remove } from '@material-ui/icons';
+import IconButton from '@material-ui/core/IconButton';
+import KeyboardArrowRight from '@material-ui/icons/KeyboardArrowRight';
+import Remove from '@material-ui/icons/Remove';
 
 const ExpandButton = ({
   areAllRowsExpanded,

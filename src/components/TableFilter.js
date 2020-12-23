@@ -1,4 +1,5 @@
-import { Grid, TextField } from '@material-ui/core';
+import Grid from '@material-ui/core/Grid';
+import TextField from '@material-ui/core/TextField';
 
 import Button from '@material-ui/core/Button';
 import Checkbox from '@material-ui/core/Checkbox';
@@ -14,7 +15,7 @@ import React from 'react';
 import Select from '@material-ui/core/Select';
 import Typography from '@material-ui/core/Typography';
 import clsx from 'clsx';
-import { withStyles } from '@material-ui/core/styles';
+import withStyles from '@material-ui/core/styles/withStyles';
 import cloneDeep from 'lodash.clonedeep';
 
 export const defaultFilterStyles = theme => ({
