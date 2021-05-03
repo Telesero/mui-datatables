@@ -24,6 +24,7 @@ import { buildMap, getCollatorComparator, getPageValue, sortCompare, warnDepreca
 import { DndProvider } from 'react-dnd';
 import { HTML5Backend } from 'react-dnd-html5-backend';
 import Popover from "./components/Popover";
+import { load, save } from './localStorage';
 
 const defaultTableStyles = theme => ({
   root: {},
@@ -246,6 +247,7 @@ class MUIDataTable extends React.Component {
       setTableProps: PropTypes.func,
       sort: PropTypes.bool,
       sortOrder: PropTypes.object,
+      storageKey: PropTypes.string,
       viewColumns: PropTypes.oneOf([true, false, 'true', 'false', 'disabled']),
     }),
     /** Pass and use className to style MUIDataTable as desired */
@@ -268,8 +270,6 @@ class MUIDataTable extends React.Component {
       TableToolbar: DefaultTableToolbar,
       TableToolbarSelect: DefaultTableToolbarSelect,
       Tooltip: MuiTooltip,
-      TableFilterPopover: Popover,
-      TableViewColumnsPopover: Popover,
       icons: {},
     },
   };
@@ -311,7 +311,10 @@ class MUIDataTable extends React.Component {
     };
 
     this.mergeDefaultOptions(props);
-    this.state = Object.assign(defaultState, this.getInitTableOptions());
+
+    const restoredState = load(props.options.storageKey);
+    this.state = Object.assign(defaultState, restoredState ? restoredState : this.getInitTableOptions());
+
     this.setTableData = this.setTableData.bind(this);
 
     this.setTableData(props, TABLE_LOAD.INITIAL, true, null, true);
@@ -365,8 +368,8 @@ class MUIDataTable extends React.Component {
       props.options.selectToolbarPlacement = STP.NONE;
     }
 
-    // provide default tableId when no tableId has been passed as prop
-    if (!props.options.tableId) {
+    // provide default tableId when draggableColumns is enabled and no tableId has been passed as prop
+    if (props.options.draggableColumns && props.options.draggableColumns.enabled === true && !props.options.tableId) {
       props.options.tableId = (Math.random() + '').replace(/\./, '');
     }
 
@@ -547,6 +550,9 @@ class MUIDataTable extends React.Component {
   setTableAction = action => {
     if (typeof this.options.onTableChange === 'function') {
       this.options.onTableChange(action, this.state);
+    }
+    if (this.options.storageKey) {
+      save(this.options.storageKey, this.state);
     }
   };
 
