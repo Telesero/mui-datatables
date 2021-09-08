@@ -1,11 +1,10 @@
+import React, { useState } from 'react';
+import clsx from 'clsx';
 import makeStyles from '@material-ui/core/styles/makeStyles';
 import MuiTableHead from '@material-ui/core/TableHead';
-import clsx from 'clsx';
-import React, { useState } from 'react';
 import TableHeadCell from './TableHeadCell';
 import TableHeadRow from './TableHeadRow';
 import TableSelectCell from './TableSelectCell';
-
 
 const useStyles = makeStyles(
   theme => ({

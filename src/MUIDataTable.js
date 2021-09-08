@@ -1,7 +1,7 @@
 import Paper from '@material-ui/core/Paper';
 import MuiTable from '@material-ui/core/Table';
 import MuiTooltip from '@material-ui/core/Tooltip';
-import  withStyles  from '@material-ui/core/styles/withStyles';
+import withStyles from '@material-ui/core/styles/withStyles';
 import clsx from 'clsx';
 import assignwith from 'lodash.assignwith';
 import cloneDeep from 'lodash.clonedeep';
@@ -233,6 +233,7 @@ class MUIDataTable extends React.Component {
       rowsSelected: PropTypes.array,
       search: PropTypes.oneOf([true, false, 'true', 'false', 'disabled']),
       searchOpen: PropTypes.bool,
+      searchAlwaysOpen: PropTypes.bool,
       searchPlaceholder: PropTypes.string,
       searchText: PropTypes.string,
       setFilterChipProps: PropTypes.func,
@@ -266,6 +267,7 @@ class MUIDataTable extends React.Component {
       TableToolbar: DefaultTableToolbar,
       TableToolbarSelect: DefaultTableToolbarSelect,
       Tooltip: MuiTooltip,
+      icons: {},
     },
   };
 
@@ -360,8 +362,8 @@ class MUIDataTable extends React.Component {
       props.options.selectToolbarPlacement = STP.NONE;
     }
 
-    // provide default tableId when draggableColumns is enabled and no tableId has been passed as prop
-    if (props.options.draggableColumns && props.options.draggableColumns.enabled === true && !props.options.tableId) {
+    // provide default tableId when no tableId has been passed as prop
+    if (!props.options.tableId) {
       props.options.tableId = (Math.random() + '').replace(/\./, '');
     }
 

@@ -146,7 +146,7 @@ The component accepts the following props:
 |:--:|:-----|:-----|
 |**`title`**|array|Title used to caption table
 |**`columns`**|array|Columns used to describe table. Must be either an array of simple strings or objects describing a column
-|**`data`**|array|Data used to describe table. Must be either an array containing objects of key/value pairs with values that are strings or numbers, or arrays of strings or numbers (Ex: data: [{"Name": "Joe", "Job Title": "Plumber", "Age": 30}, {"Name": "Jane", "Job Title": "Electrician", "Age": 45}] or data: [["Joe", "Plumber", 30], ["Jane", "Electrician", 45]]). The **customBodyRender** and **customBodyRenderLite** options can be used to control the data diaplay.
+|**`data`**|array|Data used to describe table. Must be either an array containing objects of key/value pairs with values that are strings or numbers, or arrays of strings or numbers (Ex: data: [{"Name": "Joe", "Job Title": "Plumber", "Age": 30}, {"Name": "Jane", "Job Title": "Electrician", "Age": 45}] or data: [["Joe", "Plumber", 30], ["Jane", "Electrician", 45]]). The **customBodyRender** and **customBodyRenderLite** options can be used to control the data display.
 |**`options`**|object|Options used to describe table
 |**`components`**|object|Custom components used to render the table
 
@@ -218,6 +218,7 @@ The component accepts the following props:
 |**`searchPlaceholder`**|string||Search text placeholder. [Example](https://github.com/gregnb/mui-datatables/blob/master/examples/customize-search/index.js)
 |**`searchProps`**|object|{}|Props applied to the search text box. You can set method callbacks like onBlur, onKeyUp, etc, this way. [Example](https://github.com/gregnb/mui-datatables/blob/master/examples/customize-search/index.js)
 |**`searchOpen`**|boolean|false|Initially displays search bar.
+|**`searchAlwaysOpen`**|boolean|false|Always displays search bar, and hides search icon in toolbar.
 |**`searchText`**|string||Search text for the table.
 |**`selectableRows`**|string|'multiple'|Indicates if rows can be selected. Options are "multiple", "single", "none".
 |**`selectableRowsHeader`**|boolean|true|Show/hide the select all/deselect all checkbox header for selectable rows.
@@ -426,7 +427,14 @@ Supported customizable components:
  * `TableResize`
  * `TableToolbar`
  * `TableToolbarSelect`
- * `Tooltip`
+* `Tooltip`
+* `icons` - An object containing optional replacement icon classes for the actions
+  toolbar. [Example](https://github.com/gregnb/mui-datatables/blob/master/examples/customize-toolbar-icons/index.js)
+	* `SearchIcon`
+	* `DownloadIcon`
+	* `PrintIcon`
+	* `ViewColumnIcon`
+	* `FilterIcon`
 
 For more information, please see this [example](https://github.com/gregnb/mui-datatables/blob/master/examples/custom-components/index.js). Additionally, all examples can be viewed [live](https://codesandbox.io/s/github/gregnb/mui-datatables) at our CodeSandbox.
 
