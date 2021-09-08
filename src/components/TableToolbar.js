@@ -107,7 +107,12 @@ const RESPONSIVE_FULL_WIDTH_NAME = 'scrollFullHeightFullWidth';
 class TableToolbar extends React.Component {
   state = {
     iconActive: null,
-    showSearch: Boolean(this.props.searchText || this.props.options.searchText || this.props.options.searchOpen),
+    showSearch: Boolean(
+      this.props.searchText ||
+        this.props.options.searchText ||
+        this.props.options.searchOpen ||
+        this.props.options.searchAlwaysOpen,
+    ),
     searchText: this.props.searchText || null,
   };
 
@@ -290,10 +295,16 @@ class TableToolbar extends React.Component {
       components = {},
       updateFilterByType,
     } = this.props;
+    const { icons = {} } = components;
 
     const Tooltip = components.Tooltip || MuiTooltip;
     const TableViewColComponent = components.TableViewCol || TableViewCol;
     const TableFilterComponent = components.TableFilter || TableFilter;
+    const SearchIconComponent = icons.SearchIcon || SearchIcon;
+    const DownloadIconComponent = icons.DownloadIcon || DownloadIcon;
+    const PrintIconComponent = icons.PrintIcon || PrintIcon;
+    const ViewColumnIconComponent = icons.ViewColumnIcon || ViewColumnIcon;
+    const FilterIconComponent = icons.FilterIcon || FilterIcon;
     const { search, downloadCsv, print, viewColumns, filterTable } = options.textLabels.toolbar;
     const { showSearch, searchText } = this.state;
 
@@ -338,7 +349,7 @@ class TableToolbar extends React.Component {
           )}
         </div>
         <div className={options.responsive !== RESPONSIVE_FULL_WIDTH_NAME ? classes.actions : classes.fullWidthActions}>
-          {!(options.search === false || options.search === 'false') && (
+          {!(options.search === false || options.search === 'false' || options.searchAlwaysOpen === true) && (
             <Tooltip title={search} disableFocusListener>
               <IconButton
                 aria-label={search}
@@ -347,19 +358,19 @@ class TableToolbar extends React.Component {
                 classes={{ root: this.getActiveIcon(classes, 'search') }}
                 disabled={options.search === 'disabled'}
                 onClick={this.handleSearchIconClick}>
-                <SearchIcon />
+                <SearchIconComponent />
               </IconButton>
             </Tooltip>
           )}
           {!(options.download === false || options.download === 'false') && (
             <Tooltip title={downloadCsv}>
               <IconButton
-                data-testid={downloadCsv + '-iconButton'}
+                data-testid={downloadCsv.replace(/\s/g, '') + '-iconButton'}
                 aria-label={downloadCsv}
                 classes={{ root: classes.icon }}
                 disabled={options.download === 'disabled'}
                 onClick={this.handleCSVDownload}>
-                <DownloadIcon />
+                <DownloadIconComponent />
               </IconButton>
             </Tooltip>
           )}
@@ -376,7 +387,7 @@ class TableToolbar extends React.Component {
                           disabled={options.print === 'disabled'}
                           onClick={handlePrint}
                           classes={{ root: classes.icon }}>
-                          <PrintIcon />
+                          <PrintIconComponent />
                         </IconButton>
                       </Tooltip>
                     </span>
@@ -398,7 +409,7 @@ class TableToolbar extends React.Component {
                     classes={{ root: this.getActiveIcon(classes, 'viewcolumns') }}
                     disabled={options.viewColumns === 'disabled'}
                     onClick={this.setActiveIcon.bind(null, 'viewcolumns')}>
-                    <ViewColumnIcon />
+                    <ViewColumnIconComponent />
                   </IconButton>
                 </Tooltip>
               }
@@ -427,7 +438,7 @@ class TableToolbar extends React.Component {
                     classes={{ root: this.getActiveIcon(classes, 'filter') }}
                     disabled={options.filter === 'disabled'}
                     onClick={this.setActiveIcon.bind(null, 'filter')}>
-                    <FilterIcon />
+                    <FilterIconComponent />
                   </IconButton>
                 </Tooltip>
               }
