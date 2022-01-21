@@ -300,6 +300,8 @@ class TableToolbar extends React.Component {
     const Tooltip = components.Tooltip || MuiTooltip;
     const TableViewColComponent = components.TableViewCol || TableViewCol;
     const TableFilterComponent = components.TableFilter || TableFilter;
+    const ViewColumnsPopoverComponent = components.TableViewColumnsPopover || Popover;
+    const FilterPopoverComponent = components.TableFilterPopover || Popover;
     const SearchIconComponent = icons.SearchIcon || SearchIcon;
     const DownloadIconComponent = icons.DownloadIcon || DownloadIcon;
     const PrintIconComponent = icons.PrintIcon || PrintIcon;
@@ -397,7 +399,7 @@ class TableToolbar extends React.Component {
             </span>
           )}
           {!(options.viewColumns === false || options.viewColumns === 'false') && (
-            <Popover
+            <ViewColumnsPopoverComponent
               refExit={this.setActiveIcon.bind(null)}
               classes={{ closeIcon: classes.filterCloseIcon }}
               hide={options.viewColumns === 'disabled'}
@@ -426,7 +428,7 @@ class TableToolbar extends React.Component {
             />
           )}
           {!(options.filter === false || options.filter === 'false') && (
-            <Popover
+            <FilterPopoverComponent
               refExit={filterPopoverExit}
               hide={this.state.hideFilterPopover || options.filter === 'disabled'}
               classes={{ paper: classes.filterPaper, closeIcon: classes.filterCloseIcon }}
