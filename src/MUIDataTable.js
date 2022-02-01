@@ -23,6 +23,7 @@ import getTextLabels from './textLabels';
 import { buildMap, getCollatorComparator, getPageValue, sortCompare, warnDeprecated, warnInfo } from './utils';
 import { DndProvider } from 'react-dnd';
 import { HTML5Backend } from 'react-dnd-html5-backend';
+import Popover from "./components/Popover";
 
 const defaultTableStyles = theme => ({
   root: {},
@@ -267,6 +268,8 @@ class MUIDataTable extends React.Component {
       TableToolbar: DefaultTableToolbar,
       TableToolbarSelect: DefaultTableToolbarSelect,
       Tooltip: MuiTooltip,
+      TableFilterPopover: Popover,
+      TableViewColumnsPopover: Popover,
       icons: {},
     },
   };
