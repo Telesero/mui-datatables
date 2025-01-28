@@ -1967,6 +1967,14 @@ class MUIDataTable extends React.Component {
               components={this.props.components}
             />
           )}
+        <TableFooterComponent
+          options={this.options}
+          page={page}
+          rowCount={rowCount}
+          rowsPerPage={rowsPerPage}
+          changeRowsPerPage={this.changeRowsPerPage}
+          changePage={this.changePage}
+        />
         <TableFilterListComponent
           options={this.options}
           serverSideFilterList={this.props.options.serverSideFilterList}
